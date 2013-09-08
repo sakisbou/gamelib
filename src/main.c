@@ -19,7 +19,7 @@ void init(void)
   sdl_init();
   gl_init();
   gl_textures_init();
-  init_time();
+  time_init();
 }
 
 
@@ -56,22 +56,24 @@ int main(int argc, char **argv)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     angle++; if(angle > 360) angle = 0;
-    camera_angle += 0.2; if(camera_angle > 360) camera_angle = 0;
+    camera_angle += 0.38; if(camera_angle > 360) camera_angle = 0;
 
 
 
-    glMatrixMode(GL_PROJECTION); // used for setting up the scene
-    glPopMatrix(); // restore initial setup
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix(); // restore initial setup (reset camera)
     glPushMatrix(); // save it again for the next run
 
+    // camera setup
     glTranslatef(0, 0, -12);
     glRotatef(camera_angle, 0.0, 1.0, 0.0);
     glTranslatef(0, 0, 12);
   
 
 
-    glMatrixMode(GL_MODELVIEW);
+    glMatrixMode(GL_MODELVIEW); // use it to draw the scene
 
+    // scene elements can be placed using opengl
     glLoadIdentity();
     glTranslatef(-4, -3, -12);
     glRotatef(angle, 1.0, 0.0, 0.0);
@@ -95,7 +97,8 @@ int main(int argc, char **argv)
     glFlush();
     SDL_GL_SwapWindow(main_window);
 
-    if(getkey(SDL_SCANCODE_ESCAPE)) break;
+    if(getkey(SDL_SCANCODE_ESCAPE)) quit();
+    if(update_events() == -1) break;
   }
   
   cleanup();

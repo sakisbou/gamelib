@@ -19,7 +19,6 @@ typedef struct
 
 
 
-
 /*
     polygon
 */
@@ -28,7 +27,7 @@ typedef struct
  {
   int startVertex;     // starting vertex's indice in 'vertex' array
   int numOfVertices;   // number of subsequent polygons
-  int texture;         // texture's name index in 'textureName' array
+  GLuint texture;         // texture's name index in 'textureName' array
 //  int lightmap;        // lightmap's name index in 'lightMapName' array
  } polygon_t;
 

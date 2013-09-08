@@ -41,10 +41,10 @@ void gl_init(void)
   glVertexPointer(3,GL_FLOAT,sizeof(vertex_t),vertex[0].coordinate);
   glClientActiveTextureARB(GL_TEXTURE0_ARB); 
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-  glTexCoordPointer(3,GL_FLOAT,sizeof(vertex_t),vertex[0].texCoordinate);
+  glTexCoordPointer(2,GL_FLOAT,sizeof(vertex_t),vertex[0].texCoordinate);
   glClientActiveTextureARB(GL_TEXTURE1_ARB); 
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-  glTexCoordPointer(3,GL_FLOAT,sizeof(vertex_t),vertex[0].lmapCoordinate);
+  glTexCoordPointer(2 ,GL_FLOAT,sizeof(vertex_t),vertex[0].lmapCoordinate);
   */
 
   // set up texturing

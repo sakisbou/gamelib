@@ -15,7 +15,7 @@
 
 SDL_Window *main_window;
 SDL_GLContext main_gl_context;
-
+const Uint8 *keyboard;
 
 
 
@@ -41,9 +41,11 @@ void usererror_(char *format, ...);
 void sdl_init(void);
 void sdl_cleanup(void);
 
-uint8_t getkey(int key);
+int update_events(void);
+void quit(void);
+uint8_t getkey(uint8_t key);
 
-void init_time(void);
+void time_init(void);
 uint32_t get_rel_time(void);
 
 #endif

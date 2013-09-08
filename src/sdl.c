@@ -119,8 +119,40 @@ void sdl_cleanup(void)
 
 
 /*
-    --- input ------------------------------------------------------------------
+    --- events and input -------------------------------------------------------
 */
+
+
+
+
+/*
+    update_events
+*/
+
+int update_events(void)
+{
+  SDL_Event e;
+
+  while(SDL_PollEvent(&e)) 
+    if(e.type == SDL_QUIT) return -1;
+
+  return 0;
+}
+
+
+
+
+/*
+    quit
+*/
+
+void quit(void)
+{
+  SDL_Event e;
+  e.quit.type = SDL_QUIT;
+
+  SDL_PushEvent(&e);
+}
 
 
 
@@ -129,10 +161,9 @@ void sdl_cleanup(void)
     getkey
 */
 
-uint8_t getkey(int key)
+uint8_t getkey(uint8_t key)
 {
-  SDL_PumpEvents();
-  const Uint8 *keyboard = SDL_GetKeyboardState(NULL);
+  const uint8_t *keyboard = SDL_GetKeyboardState(NULL);
   return keyboard[key];
 }
 
@@ -155,7 +186,7 @@ static uint32_t prev_time;
     init_time
 */
 
-void init_time(void) { prev_time = SDL_GetTicks(); }
+void time_init(void) { prev_time = SDL_GetTicks(); }
 
 
 
