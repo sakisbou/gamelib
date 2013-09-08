@@ -4,32 +4,38 @@
 
 
 
-/*
-    vertex
-*/
+  static GLfloat vertex[] =
+  {
+    -1, -1, 1,    1, -1, 1,    1, 1, 1,    -1, 1, 1,
+    1, -1, 1,    1, -1, -1,    1, 1, -1,    1, 1, 1,
+    -1, -1, -1,    -1, 1, -1,    1, 1, -1,    1, -1, -1,
+    -1, -1, -1,    -1, -1, 1,    -1, 1, 1,    -1, 1, -1,
+    -1, 1, 1,    1, 1, 1,    1, 1, -1,    -1, 1, -1,
+    -1, -1, 1,    -1, -1, -1,    1, -1, -1,    1, -1, 1
+  };
 
-typedef struct
-{
-  float coordinate[3];     // world coordinates in the form {x,y,z)
-  float texCoordinate[2];  // texture coordinates in the form {u,v}
-  //float lmapCoordinate[2]; // lightmap coordinates in the form {u,v}
-  //float normal[3];         // point's normal in the form {x,y,z}
-} vertex_t;
+  static GLfloat texcoord_01[] =
+  {
+    0, 1,   1, 1,   1, 0,   0, 0,
+    0, 1,   1, 1,   1, 0,   0, 0,
+    0, 1,   1, 1,   1, 0,   0, 0,
+    0, 1,   1, 1,   1, 0,   0, 0,
+    0, 1,   1, 1,   1, 0,   0, 0,
+    0, 1,   1, 1,   1, 0,   0, 0   
+  };
 
+  static GLfloat texcoord_02[] =
+  {
+    0, 0.5,   0.5, 0.5,   0.5, 1,   0, 1,
+    0, 0,    0.5, 0,   0.5, 0.5,   0, 0.5,
+    0.5, 0,   1, 0,   1, 0.5,   0.5, 0.5,
+    0, 0,   0.5, 0,   0.5, 0.5,   0, 0.5,
+    0.5, 0.5,   1, 0.5,   1, 1,   0.5, 1,
+    0.5, 0.5,   1, 0.5,   1, 1,   0.5, 1   
+  };
 
-
-
-/*
-    polygon
-*/
-
-typedef struct
- {
-  int startVertex;     // starting vertex's indice in 'vertex' array
-  int numOfVertices;   // number of subsequent polygons
-  GLuint texture;         // texture's name index in 'textureName' array
-//  int lightmap;        // lightmap's name index in 'lightMapName' array
- } polygon_t;
+  static GLint polystart[] = {0, 4, 8, 12, 16, 20};
+  static GLint polylength[] = {4, 4, 4, 4, 4, 4};
 
 
 
@@ -40,30 +46,10 @@ typedef struct
 
 void draw_crate_01(void)
 {
-  int i, j;
-
   glBindTexture(GL_TEXTURE_2D, crate_01);
-
-  GLfloat vertex[] = /* tex x, tex y, vert x, vert y, vert z (step 5) */
-  {
-    0, 1, -1, -1, 1,   1, 1, 1, -1, 1,   1, 0, 1, 1, 1,   0, 0, -1, 1, 1,
-    0, 1, 1, -1, 1,   1, 1, 1, -1, -1,   1, 0, 1, 1, -1,   0, 0, 1, 1, 1,
-    0, 1, -1, -1, -1,   1, 1, -1, 1, -1,   1, 0, 1, 1, -1,   0, 0, 1, -1, -1,
-    0, 1, -1, -1, -1,   1, 1, -1, -1, 1,   1, 0, -1, 1, 1,   0, 0, -1, 1, -1,
-    0, 1, -1, 1, 1,   1, 1, 1, 1, 1,   1, 0, 1, 1, -1,   0, 0, -1, 1, -1,
-    0, 1, -1, -1, 1,   1, 1, -1, -1, -1,   1, 0, 1, -1, -1,   0, 0, 1, -1, 1
-  };
-
-  for(i=0; i<120; i+=20)
-  {
-    glBegin(GL_POLYGON);
-    for(j=0; j<20; j+=5)
-    {
-      glTexCoord2f(vertex[i+j], vertex[i+j+1]);
-      glVertex3f(vertex[i+j+2], vertex[i+j+3], vertex[i+j+4]);
-    }
-    glEnd();
-  }
+  glVertexPointer(3, GL_FLOAT, sizeof(GLfloat) * 3, vertex);
+  glTexCoordPointer(2, GL_FLOAT, sizeof(GLfloat) * 2, texcoord_01);
+  glMultiDrawArrays(GL_TRIANGLE_FAN, polystart, polylength, 6);
 }
 
 
@@ -71,30 +57,10 @@ void draw_crate_01(void)
 
 void draw_crate_02(void)
 {
-  int i, j;
-
   glBindTexture(GL_TEXTURE_2D, crate_02);
-
-  GLfloat vertex[] = /* tex x, tex y, vert x, vert y, vert z (step 5) */
-  {
-    0, 1, -1, -1, 1,   1, 1, 1, -1, 1,   1, 0, 1, 1, 1,   0, 0, -1, 1, 1,
-    0, 1, 1, -1, 1,   1, 1, 1, -1, -1,   1, 0, 1, 1, -1,   0, 0, 1, 1, 1,
-    0, 1, -1, -1, -1,   1, 1, -1, 1, -1,   1, 0, 1, 1, -1,   0, 0, 1, -1, -1,
-    0, 1, -1, -1, -1,   1, 1, -1, -1, 1,   1, 0, -1, 1, 1,   0, 0, -1, 1, -1,
-    0, 1, -1, 1, 1,   1, 1, 1, 1, 1,   1, 0, 1, 1, -1,   0, 0, -1, 1, -1,
-    0, 1, -1, -1, 1,   1, 1, -1, -1, -1,   1, 0, 1, -1, -1,   0, 0, 1, -1, 1
-  };
-
-  for(i=0; i<120; i+=20)
-  {
-    glBegin(GL_POLYGON);
-    for(j=0; j<20; j+=5)
-    {
-      glTexCoord2f(vertex[i+j], vertex[i+j+1]);
-      glVertex3f(vertex[i+j+2], vertex[i+j+3], vertex[i+j+4]);
-    }
-    glEnd();
-  }
+  glVertexPointer(3, GL_FLOAT, sizeof(GLfloat) * 3, vertex);
+  glTexCoordPointer(2, GL_FLOAT, sizeof(GLfloat) * 2, texcoord_01);
+  glMultiDrawArrays(GL_TRIANGLE_FAN, polystart, polylength, 6);
 }
 
 
@@ -102,30 +68,10 @@ void draw_crate_02(void)
 
 void draw_crate_03(void)
 {
-  int i, j;
-
   glBindTexture(GL_TEXTURE_2D, crate_03);
-
-  GLfloat vertex[] = /* tex x, tex y, vert x, vert y, vert z (step 5) */
-  {
-    0, 0.5, -1, -1, 1,   0.5, 0.5, 1, -1, 1,   0.5, 1, 1, 1, 1,   0, 1, -1, 1, 1,
-    0, 0, 1, -1, 1,   0.5, 0, 1, -1, -1,   0.5, 0.5, 1, 1, -1,   0, 0.5, 1, 1, 1,
-    0.5, 0, -1, -1, -1,   1, 0, -1, 1, -1,   1, 0.5, 1, 1, -1,   0.5, 0.5, 1, -1, -1,
-    0, 0, -1, -1, -1,   0.5, 0, -1, -1, 1,   0.5, 0.5, -1, 1, 1,   0, 0.5, -1, 1, -1,
-    0.5, 0.5, -1, 1, 1,   1, 0.5, 1, 1, 1,   1, 1, 1, 1, -1,   0.5, 1, -1, 1, -1,
-    0.5, 0.5, -1, -1, 1,   1, 0.5, -1, -1, -1,   1, 1, 1, -1, -1,   0.5, 1, 1, -1, 1
-  };
-
-  for(i=0; i<120; i+=20)
-  {
-    glBegin(GL_POLYGON);
-    for(j=0; j<20; j+=5)
-    {
-      glTexCoord2f(vertex[i+j], vertex[i+j+1]);
-      glVertex3f(vertex[i+j+2], vertex[i+j+3], vertex[i+j+4]);
-    }
-    glEnd();
-  }
+  glVertexPointer(3, GL_FLOAT, sizeof(GLfloat) * 3, vertex);
+  glTexCoordPointer(2, GL_FLOAT, sizeof(GLfloat) * 2, texcoord_02);
+  glMultiDrawArrays(GL_TRIANGLE_FAN, polystart, polylength, 6);
 }
 
 
@@ -133,30 +79,10 @@ void draw_crate_03(void)
 
 void draw_crate_04(void)
 {
-  int i, j;
-
   glBindTexture(GL_TEXTURE_2D, crate_04);
-
-  GLfloat vertex[] = /* tex x, tex y, vert x, vert y, vert z (step 5) */
-  {
-    0, 0.5, -1, -1, 1,   0.5, 0.5, 1, -1, 1,   0.5, 1, 1, 1, 1,   0, 1, -1, 1, 1,
-    0, 0, 1, -1, 1,   0.5, 0, 1, -1, -1,   0.5, 0.5, 1, 1, -1,   0, 0.5, 1, 1, 1,
-    0.5, 0, -1, -1, -1,   1, 0, -1, 1, -1,   1, 0.5, 1, 1, -1,   0.5, 0.5, 1, -1, -1,
-    0, 0, -1, -1, -1,   0.5, 0, -1, -1, 1,   0.5, 0.5, -1, 1, 1,   0, 0.5, -1, 1, -1,
-    0.5, 0.5, -1, 1, 1,   1, 0.5, 1, 1, 1,   1, 1, 1, 1, -1,   0.5, 1, -1, 1, -1,
-    0.5, 0.5, -1, -1, 1,   1, 0.5, -1, -1, -1,   1, 1, 1, -1, -1,   0.5, 1, 1, -1, 1
-  };
-
-  for(i=0; i<120; i+=20)
-  {
-    glBegin(GL_POLYGON);
-    for(j=0; j<20; j+=5)
-    {
-      glTexCoord2f(vertex[i+j], vertex[i+j+1]);
-      glVertex3f(vertex[i+j+2], vertex[i+j+3], vertex[i+j+4]);
-    }
-    glEnd();
-  }
+  glVertexPointer(3, GL_FLOAT, sizeof(GLfloat) * 3, vertex);
+  glTexCoordPointer(2, GL_FLOAT, sizeof(GLfloat) * 2, texcoord_02);
+  glMultiDrawArrays(GL_TRIANGLE_FAN, polystart, polylength, 6);
 }
 
 

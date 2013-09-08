@@ -47,9 +47,6 @@ int main(int argc, char **argv)
 
   GLfloat angle = 0, camera_angle = 0;
 
-  glMatrixMode(GL_PROJECTION); // used as camera
-  glPushMatrix(); // projection settings must be saved
-
   for(;;)
   {
     glClearColor(0.3, 0.56, 0.85, 1.0);
@@ -59,40 +56,42 @@ int main(int argc, char **argv)
     camera_angle += 0.38; if(camera_angle > 360) camera_angle = 0;
 
 
-
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix(); // restore initial setup (reset camera)
-    glPushMatrix(); // save it again for the next run
-
     // camera setup
+    glLoadIdentity();
     glTranslatef(0, 0, -12);
     glRotatef(camera_angle, 0.0, 1.0, 0.0);
     glTranslatef(0, 0, 12);
-  
 
-
-    glMatrixMode(GL_MODELVIEW); // use it to draw the scene
-
-    // scene elements can be placed using opengl
-    glLoadIdentity();
+    /*
+       models can be placed in the scene using opengl
+       by saving the modelview matrix before drawing the model
+       and restoring it right afterwards.
+    */
+    glPushMatrix();
     glTranslatef(-4, -3, -12);
     glRotatef(angle, 1.0, 0.0, 0.0);
     draw_crate_01();
+    glPopMatrix();
 
-    glLoadIdentity();
+    glPushMatrix();
     glTranslatef(4, -3, -12);
     glRotatef(angle, 0.0, 1.0, 0.0);
+    glScalef(1.5, 1.5, 1.5);
     draw_crate_02();
+    glPopMatrix();
 
-    glLoadIdentity();
+    glPushMatrix();
     glTranslatef(4, 3, -12);
     glRotatef(angle, 0.0, 0.0, 1.0);
     draw_crate_03();
+    glPopMatrix();
 
-    glLoadIdentity();
+    glPushMatrix();
     glTranslatef(-4, 3, -12);
     glRotatef(angle, 1.0, 0.0, 1.0);
+    glScalef(0.5, 0.5, 0.5);
     draw_crate_04();
+    glPopMatrix();
 
     glFlush();
     SDL_GL_SwapWindow(main_window);

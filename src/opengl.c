@@ -35,17 +35,17 @@ void gl_init(void)
   glFrontFace(GL_CCW);
   glEnable(GL_CULL_FACE);
 
-  /* 
+  
   // set up vertex arrays
   glEnableClientState(GL_VERTEX_ARRAY);
-  glVertexPointer(3,GL_FLOAT,sizeof(vertex_t),vertex[0].coordinate);
-  glClientActiveTextureARB(GL_TEXTURE0_ARB); 
+//  glVertexPointer(3,GL_FLOAT,sizeof(vertex_t),vertex[0].coordinate);
+//  glClientActiveTextureARB(GL_TEXTURE0_ARB); 
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-  glTexCoordPointer(2,GL_FLOAT,sizeof(vertex_t),vertex[0].texCoordinate);
-  glClientActiveTextureARB(GL_TEXTURE1_ARB); 
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-  glTexCoordPointer(2 ,GL_FLOAT,sizeof(vertex_t),vertex[0].lmapCoordinate);
-  */
+//  glTexCoordPointer(2,GL_FLOAT,sizeof(vertex_t),vertex[0].texCoordinate);
+//  glClientActiveTextureARB(GL_TEXTURE1_ARB); 
+//  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+//  glTexCoordPointer(2 ,GL_FLOAT,sizeof(vertex_t),vertex[0].lmapCoordinate);
+ 
 
   // set up texturing
   // glActiveTextureARB(GL_TEXTURE0_ARB);
