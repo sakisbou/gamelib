@@ -10,12 +10,12 @@
 
 #define PROGNAME "game"
 
-#define RESX 800
-#define RESY 600
+#define RESX 1024
+#define RESY 768
 #define FOV 70
 #define FOG 0
 
-#define FULLSCREEN 0
+#define FULLSCREEN 1
 
 
 #endif

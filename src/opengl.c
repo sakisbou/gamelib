@@ -1,6 +1,6 @@
 #include <IL/il.h>
+#include <IL/ilu.h>
 #include <GL/glu.h>
-
 
 #include "options.h"
 #include "sdl.h"
@@ -17,26 +17,26 @@ void gl_init(void)
 
   float fogColor[]={0.1,0.1,0.1,1};
 
-  // set up perpective
+  // setup perpective
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(FOV,(GLfloat)RESX/(GLfloat)RESY,1,16384);
   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
-  // set up shade model
+  // setup shade model
   glShadeModel(GL_SMOOTH);
 
-  // set up depth buffer
+  // setup depth buffer
   glClearDepth(1.0);
   glDepthFunc(GL_LEQUAL);
   glEnable(GL_DEPTH_TEST);
 
-  // set up face culling
+  // setup face culling
   glFrontFace(GL_CCW);
   glEnable(GL_CULL_FACE);
 
   
-  // set up vertex arrays
+  // setup vertex arrays
   glEnableClientState(GL_VERTEX_ARRAY);
 //  glVertexPointer(3,GL_FLOAT,sizeof(vertex_t),vertex[0].coordinate);
 //  glClientActiveTextureARB(GL_TEXTURE0_ARB); 
@@ -45,15 +45,22 @@ void gl_init(void)
 //  glClientActiveTextureARB(GL_TEXTURE1_ARB); 
 //  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 //  glTexCoordPointer(2 ,GL_FLOAT,sizeof(vertex_t),vertex[0].lmapCoordinate);
+  glEnableClientState(GL_NORMAL_ARRAY);
  
 
   // set up texturing
   // glActiveTextureARB(GL_TEXTURE0_ARB);
   glEnable(GL_TEXTURE_2D);
-  glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_REPLACE);
+  glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
   // glActiveTextureARB(GL_TEXTURE1_ARB);
   // glEnable(GL_TEXTURE_2D);
   // glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+
+  // setup lights
+   glEnable(GL_LIGHTING);
+   glEnable(GL_LIGHT0);
+   glEnable(GL_LIGHT1);
+
 
   // set up fog
   glFogi(GL_FOG_MODE,GL_EXP2);
@@ -88,6 +95,8 @@ GLuint create_gl_texture(char *image_filename)
   ilGenImages(1, &image_name);
   ilBindImage(image_name);
   ilLoadImage(image_filename);
+
+  iluRotate(180);
 
   width = ilGetInteger(IL_IMAGE_WIDTH);
   height = ilGetInteger(IL_IMAGE_HEIGHT);
