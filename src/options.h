@@ -12,7 +12,7 @@
 
 #define RESX 1024
 #define RESY 768
-#define FOV 70
+#define FOV 50
 #define FOG 0
 
 #define FULLSCREEN 1

@@ -1,5 +1,4 @@
 #include <IL/il.h>
-#include <IL/ilu.h>
 #include <GL/glu.h>
 
 #include "options.h"
@@ -57,9 +56,9 @@ void gl_init(void)
   // glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
 
   // setup lights
-   glEnable(GL_LIGHTING);
-   glEnable(GL_LIGHT0);
-   glEnable(GL_LIGHT1);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_NORMALIZE);
+//  glEnable(GL_RESCALE_NORMAL);
 
 
   // set up fog
@@ -69,7 +68,12 @@ void gl_init(void)
   glHint(GL_FOG_HINT,GL_NICEST);
   if(FOG) glEnable(GL_FOG);
 
-  // reset cammera
+  // rotate textures to compensate for different origin per image type.
+  glMatrixMode(GL_TEXTURE);
+  glLoadIdentity();
+  glRotatef(180, 1, 0, 0);
+
+  // reset camera
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
@@ -95,8 +99,6 @@ GLuint create_gl_texture(char *image_filename)
   ilGenImages(1, &image_name);
   ilBindImage(image_name);
   ilLoadImage(image_filename);
-
-  iluRotate(180);
 
   width = ilGetInteger(IL_IMAGE_WIDTH);
   height = ilGetInteger(IL_IMAGE_HEIGHT);

@@ -13,11 +13,9 @@
 */
 void gl_textures_init(void)
 {
-  crate_01 = create_gl_texture("../textures/crate_01.jpg");
-  crate_02 = create_gl_texture("../textures/crate_02.jpg");
-  crate_03 = create_gl_texture("../textures/crate_03.jpg");
-  crate_04 = create_gl_texture("../textures/crate_04.jpg");
-  lander = create_gl_texture("../textures/lander.jpg");
+  lander = create_gl_texture("textures/lander.jpg");
+  terrain = create_gl_texture("textures/terrain-03.jpg");
+  earth = create_gl_texture("textures/earth.jpg");
 }
 
 
