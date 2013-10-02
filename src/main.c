@@ -5,11 +5,9 @@
 
 #include "opengl.h"
 #include "sdl.h"
-#include "textures.h"
 
-#include "terrain.h"
-#include "lander.h"
-#include "earth.h"
+#include "textures.h"
+#include "models.h"
 
 
 

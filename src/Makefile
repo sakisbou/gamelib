@@ -1,7 +1,8 @@
 PROGNAME=game
 
 ARGS=-Wall -O2
-OBJ=main.o sdl.o opengl.o textures.o lander.o terrain.o earth.o
+MODELS=lander.o terrain.o earth.o
+OBJ=main.o sdl.o opengl.o textures.o $(MODELS)
 LIBS=-lSDL2 -lGL -lGLU -lIL -lm
 
 $(PROGNAME):$(OBJ)
@@ -16,14 +17,14 @@ sdl.o:sdl.h sdl.c options.h
 opengl.o:opengl.h opengl.c options.h
 	gcc $(ARGS) -c opengl.c
 
-lander.o:lander.h lander.c
-	gcc $(ARGS) -c lander.c
+lander.o:models/lander.c
+	gcc $(ARGS) -c models/lander.c
 
-terrain.o:terrain.h terrain.c
-	gcc $(ARGS) -c terrain.c
+terrain.o:models/terrain.c
+	gcc $(ARGS) -c models/terrain.c
 
-earth.o:earth.h earth.c
-	gcc $(ARGS) -c earth.c
+earth.o:models/earth.c
+	gcc $(ARGS) -c models/earth.c
 
 textures.o:textures.h textures.c
 	gcc $(ARGS) -c textures.c
