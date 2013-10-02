@@ -186,7 +186,7 @@ static uint32_t prev_time;
     init_time
 */
 
-void time_init(void) { prev_time = SDL_GetTicks(); }
+void time_reset(void) { prev_time = SDL_GetTicks(); }
 
 
 

@@ -45,7 +45,7 @@ int update_events(void);
 void quit(void);
 uint8_t getkey(uint8_t key);
 
-void time_init(void);
+void time_reset(void);
 uint32_t get_rel_time(void);
 
 #endif
