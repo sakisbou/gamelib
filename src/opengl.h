@@ -1,5 +1,5 @@
-#ifndef __OPENGL__
-#define __OPENGL__
+#ifndef __OPENGL_H__
+#define __OPENGL_H__
 
 
 

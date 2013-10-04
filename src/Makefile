@@ -2,7 +2,7 @@ PROGNAME=game
 
 ARGS=-Wall -O2
 MODELS=lander.o terrain.o earth.o
-OBJ=main.o sdl.o opengl.o textures.o $(MODELS)
+OBJ=main.o sdl.o opengl.o textures.o game_data.o logic.o scene.o $(MODELS)
 LIBS=-lSDL2 -lGL -lGLU -lIL -lm
 
 $(PROGNAME):$(OBJ)
@@ -28,6 +28,15 @@ earth.o:models/earth.c
 
 textures.o:textures.h textures.c
 	gcc $(ARGS) -c textures.c
+
+game_data.o:game_data.h game_data.c
+	gcc $(ARGS) -c game_data.c
+
+logic.o:logic.h logic.c
+	gcc $(ARGS) -c logic.c
+
+scene.o:scene.h scene.c
+	gcc $(ARGS) -c scene.c
 
 clean:
 	rm -rf *.o *~ models/*~ blender_gl_export/*~ game

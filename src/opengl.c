@@ -56,6 +56,8 @@ void gl_init(void)
   // glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
 
   // setup lights
+  GLfloat lmodel_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
   glEnable(GL_LIGHTING);
   glEnable(GL_NORMALIZE);
 //  glEnable(GL_RESCALE_NORMAL);
