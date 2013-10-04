@@ -14,7 +14,7 @@ void draw_terrain(void)
       vertices
   */
 
-  GLfloat vertex[]=
+  GLfloat terrain_vertex[]=
   {
     0.524436f, -0.056496f, 0.129709f,
     0.492815f, -0.056513f, 0.125092f,
@@ -6422,7 +6422,7 @@ void draw_terrain(void)
       texture coordinates
   */
 
-  GLfloat texcoord[]=
+  GLfloat terrain_texcoord[]=
   {
     1.135010f, 0.372881f,
     1.109601f, 0.372663f,
@@ -12830,7 +12830,7 @@ void draw_terrain(void)
       normals
   */
 
-  GLfloat normal[]=
+  GLfloat terrain_normal[]=
   {
     -0.046358f, -0.937223f, 0.345531f,
     -0.023377f, -0.927458f, 0.373150f,
@@ -19238,7 +19238,7 @@ void draw_terrain(void)
       polygon starts
   */
 
-  GLuint polystart[]=
+  GLuint terrain_polystart[]=
   {
     0,
     4,
@@ -20846,7 +20846,7 @@ void draw_terrain(void)
       polygon lengths
   */
 
-  GLuint polylength[]=
+  GLuint terrain_polylength[]=
   {
     4,
     4,
@@ -22454,7 +22454,7 @@ void draw_terrain(void)
       total number of polygons
   */
 
-  GLuint num_of_polygons = 1600;
+  GLuint terrain_num_of_polys = 1600;
 
 
 
@@ -22464,10 +22464,10 @@ void draw_terrain(void)
 */
 
   glBindTexture(GL_TEXTURE_2D, terrain);
-  glVertexPointer(3, GL_FLOAT, 0, vertex);
-  glTexCoordPointer(2, GL_FLOAT, 0, texcoord);
-  glNormalPointer(GL_FLOAT, 0, normal);
-  glMultiDrawArrays(GL_TRIANGLE_FAN, polystart, polylength, num_of_polygons);
+  glVertexPointer(3, GL_FLOAT, 0, terrain_vertex);
+  glTexCoordPointer(2, GL_FLOAT, 0, terrain_texcoord);
+  glNormalPointer(GL_FLOAT, 0, terrain_normal);
+  glMultiDrawArrays(GL_TRIANGLE_FAN, terrain_polystart, terrain_polylength, terrain_num_of_polys);
 
 }
 

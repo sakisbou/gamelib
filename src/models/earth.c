@@ -8,13 +8,11 @@
 #include <GL/gl.h>
 #include "../textures.h"
 
-void draw_earth(void)
-{
   /*
       vertices
   */
 
-  GLfloat vertex[]=
+  GLfloat earth_vertex[]=
   {
     -0.815493f, 0.162212f, -0.555570f,
     -0.693520f, 0.137950f, -0.707107f,
@@ -2006,7 +2004,7 @@ void draw_earth(void)
       texture coordinates
   */
 
-  GLfloat texcoord[]=
+  GLfloat earth_texcoord[]=
   {
     0.957708f, 0.365970f,
     0.959044f, 0.299347f,
@@ -3998,7 +3996,7 @@ void draw_earth(void)
       normals
   */
 
-  GLfloat normal[]=
+  GLfloat earth_normal[]=
   {
     -0.817316f, 0.162572f, -0.552751f,
     -0.696493f, 0.138524f, -0.704031f,
@@ -5990,7 +5988,7 @@ void draw_earth(void)
       polygon starts
   */
 
-  GLuint polystart[]=
+  GLuint earth_polystart[]=
   {
     0,
     4,
@@ -6510,7 +6508,7 @@ void draw_earth(void)
       polygon lengths
   */
 
-  GLuint polylength[]=
+  GLuint earth_polylength[]=
   {
     4,
     4,
@@ -7030,7 +7028,7 @@ void draw_earth(void)
       total number of polygons
   */
 
-  GLuint num_of_polygons = 512;
+  GLuint earth_num_of_polys = 512;
 
 
 
@@ -7039,12 +7037,13 @@ void draw_earth(void)
       draw oject
 */
 
+void draw_earth(void)
+{
   glBindTexture(GL_TEXTURE_2D, earth);
-  glVertexPointer(3, GL_FLOAT, 0, vertex);
-  glTexCoordPointer(2, GL_FLOAT, 0, texcoord);
-  glNormalPointer(GL_FLOAT, 0, normal);
-  glMultiDrawArrays(GL_TRIANGLE_FAN, polystart, polylength, num_of_polygons);
-
+  glVertexPointer(3, GL_FLOAT, 0, earth_vertex);
+  glTexCoordPointer(2, GL_FLOAT, 0, earth_texcoord);
+  glNormalPointer(GL_FLOAT, 0, earth_normal);
+  glMultiDrawArrays(GL_TRIANGLE_FAN, earth_polystart, earth_polylength, earth_num_of_polys);
 }
 
 

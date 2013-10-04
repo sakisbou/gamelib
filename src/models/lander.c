@@ -8,13 +8,11 @@
 #include <GL/gl.h>
 #include "../textures.h"
 
-void draw_lander(void)
-{
   /*
       vertices
   */
 
-  GLfloat vertex[]=
+  GLfloat lander_vertex[]=
   {
     -5.721342f, 6.910786f, 9.198556f,
     -5.721342f, 6.910786f, 12.565038f,
@@ -3774,7 +3772,7 @@ void draw_lander(void)
       texture coordinates
   */
 
-  GLfloat texcoord[]=
+  GLfloat lander_texcoord[]=
   {
     0.000000f, 0.000000f,
     0.000000f, 0.000000f,
@@ -7534,7 +7532,7 @@ void draw_lander(void)
       normals
   */
 
-  GLfloat normal[]=
+  GLfloat lander_normal[]=
   {
     0.707107f, 0.707106f, 0.000000f,
     0.707107f, 0.707106f, 0.000000f,
@@ -11294,7 +11292,7 @@ void draw_lander(void)
       polygon starts
   */
 
-  GLuint polystart[]=
+  GLuint lander_polystart[]=
   {
     0,
     4,
@@ -12282,7 +12280,7 @@ void draw_lander(void)
       polygon lengths
   */
 
-  GLuint polylength[]=
+  GLuint lander_polylength[]=
   {
     4,
     4,
@@ -13270,7 +13268,7 @@ void draw_lander(void)
       total number of polygons
   */
 
-  GLuint num_of_polygons = 980;
+  GLuint lander_num_of_polys = 980;
 
 
 
@@ -13279,12 +13277,13 @@ void draw_lander(void)
       draw oject
 */
 
+void draw_lander(void)
+{
   glBindTexture(GL_TEXTURE_2D, lander);
-  glVertexPointer(3, GL_FLOAT, 0, vertex);
-  glTexCoordPointer(2, GL_FLOAT, 0, texcoord);
-  glNormalPointer(GL_FLOAT, 0, normal);
-  glMultiDrawArrays(GL_TRIANGLE_FAN, polystart, polylength, num_of_polygons);
-
+  glVertexPointer(3, GL_FLOAT, 0, lander_vertex);
+  glTexCoordPointer(2, GL_FLOAT, 0, lander_texcoord);
+  glNormalPointer(GL_FLOAT, 0, lander_normal);
+  glMultiDrawArrays(GL_TRIANGLE_FAN, lander_polystart, lander_polylength, lander_num_of_polys);
 }
 
 

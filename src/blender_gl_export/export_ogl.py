@@ -163,20 +163,20 @@ def buildData (obj, msh, name):
  
 def writeVertices(file):
     
-    file.write ("  /*\n")
-    file.write ("      vertices\n")
-    file.write ("  */\n\n")
+    file.write ("/*\n")
+    file.write ("    vertices\n")
+    file.write ("*/\n\n")
     
     #write verictes table
-    file.write ("  GLfloat vertex[]=\n  {\n")
+    file.write ("GLfloat vertex[]=\n{\n")
     for i, d in enumerate(vl):
         for j in range(0,len(d)):
-            file.write ("    %ff, %ff, %ff"%tuple(vl[i][j]))
+            file.write ("  %ff, %ff, %ff"%tuple(vl[i][j]))
             if(j!=len(d)-1):
                 file.write(",\n")
             else:
                 file.write("\n")
-    file.write("  };\n\n")
+    file.write("};\n\n")
 
 
 ###########################################################
@@ -187,12 +187,12 @@ def writeVertices(file):
  
 def writeTextureCoords(file):
     
-    file.write ("  /*\n")
-    file.write ("      texture coordinates\n")
-    file.write ("  */\n\n")
+    file.write ("/*\n")
+    file.write ("    texture coordinates\n")
+    file.write ("*/\n\n")
     
     #write verictes table
-    file.write ("  GLfloat texcoord[]=\n  {\n")
+    file.write ("GLfloat texcoord[]=\n{\n")
     for i, d in enumerate(vl):
         for j in range(0,len(d)):
 
@@ -203,12 +203,12 @@ def writeTextureCoords(file):
 #            v=-v
 #            file.write (" %ff"%v)
 
-            file.write ("    %ff, %ff"%tuple(uvl[i][j]))
+            file.write ("  %ff, %ff"%tuple(uvl[i][j]))
             if(j!=len(d)-1):
                 file.write(",\n")
             else:
                 file.write("\n")
-    file.write("  };\n\n")
+    file.write("};\n\n")
 
 
 ###########################################################
@@ -219,20 +219,20 @@ def writeTextureCoords(file):
  
 def writeNormals(file):
     
-    file.write ("  /*\n")
-    file.write ("      normals\n")
-    file.write ("  */\n\n")
+    file.write ("/*\n")
+    file.write ("    normals\n")
+    file.write ("*/\n\n")
     
     #write verictes table
-    file.write ("  GLfloat normal[]=\n  {\n")
+    file.write ("GLfloat normal[]=\n{\n")
     for i, d in enumerate(vl):
         for j in range(0,len(d)):
-            file.write ("    %ff, %ff, %ff"%tuple(nl[i][j]))
+            file.write ("  %ff, %ff, %ff"%tuple(nl[i][j]))
             if(j!=len(d)-1):
                 file.write(",\n")
             else:
                 file.write("\n")
-    file.write("  };\n\n")
+    file.write("};\n\n")
 
 
 ###########################################################
@@ -243,37 +243,37 @@ def writeNormals(file):
     
 def writeFaces(file):     
 
-    file.write ("  /*\n")
-    file.write ("      polygon starts\n")
-    file.write ("  */\n\n")
+    file.write ("/*\n")
+    file.write ("    polygon starts\n")
+    file.write ("*/\n\n")
     
-    file.write("  GLuint polystart[]=\n  {\n")
+    file.write("GLuint polystart[]=\n{\n")
     
     for i in range(len(face_start)):
-        file.write("    ")
+        file.write("  ")
         file.write(str(face_start[i]))
         if(i < len(face_start)-1):
             file.write(",\n")
-    file.write("\n  };\n\n")
+    file.write("\n};\n\n")
 
-    file.write ("  /*\n")
-    file.write ("      polygon lengths\n")
-    file.write ("  */\n\n")
+    file.write ("/*\n")
+    file.write ("    polygon lengths\n")
+    file.write ("*/\n\n")
     
-    file.write("  GLuint polylength[]=\n  {\n")
+    file.write("GLuint polylength[]=\n{\n")
     
     for i in range(len(face_length)):
-        file.write("    ")
+        file.write("  ")
         file.write(str(face_length[i]))
         if(i < len(face_length)-1):
             file.write(",\n")
-    file.write("\n  };\n\n")
+    file.write("\n};\n\n")
 
-    file.write ("  /*\n")
-    file.write ("      total number of polygons\n")
-    file.write ("  */\n\n")
+    file.write ("/*\n")
+    file.write ("    total number of polygons\n")
+    file.write ("*/\n\n")
     
-    file.write("  GLuint num_of_polygons = ")
+    file.write("GLuint num_of_polygons = ")
     file.write(str(num_of_faces))
     file.write(";\n\n\n\n\n")
 
@@ -289,10 +289,10 @@ def save(filename):
     file = open(filename, "w", newline="\n")
 
     file.write("/*\n")
-    file.write("      object\n")
+    file.write("      model\n")
     file.write("*/\n\n\n\n\n")
     file.write("#include <GL/gl.h>\n")
-    file.write("#include \"textures.h\"\n\n")
+    file.write("#include \"../textures.h\"\n\n")
     file.write("void draw_object(void)\n{\n")
 
     writeVertices(file)
@@ -304,11 +304,11 @@ def save(filename):
     file.write ("      draw oject\n")
     file.write ("*/\n\n")
 
-    file.write("  glBindTexture(GL_TEXTURE_2D, object_01);\n")
+    file.write("  glBindTexture(GL_TEXTURE_2D, texture);\n")
     file.write("  glVertexPointer(3, GL_FLOAT, 0, vertex);\n")
     file.write("  glTexCoordPointer(2, GL_FLOAT, 0, texcoord);\n")
     file.write("  glNormalPointer(GL_FLOAT, 0, normal);\n")
-    file.write("  glMultiDrawArrays(GL_TRIANGLE_FAN, polystart, polylength, num_of_polygons);\n\n")
+    file.write("  glMultiDrawArrays(GL_TRIANGLE_FAN, polystart, polylength, num_of_polygons);\n")
 
     file.write("}\n\n\n\n\n")
         

@@ -30,4 +30,4 @@ textures.o:textures.h textures.c
 	gcc $(ARGS) -c textures.c
 
 clean:
-	rm -rf *.o *~ game
+	rm -rf *.o *~ models/*~ blender_gl_export/*~ game
