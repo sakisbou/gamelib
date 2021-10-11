@@ -1,4 +1,4 @@
 Experimental OGL / SDL doodling.
 Nothing usefull here, but snoop around if you must.
 
-Compiles on Debian testing, needs GL, SDL2, DevIL.
+Compiles on Debian, needs GL, SDL2, DevIL.
